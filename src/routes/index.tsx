@@ -1,24 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/apex/Nav";
+import { Hero } from "@/components/apex/Hero";
+import { Design } from "@/components/apex/Design";
+import { Performance } from "@/components/apex/Performance";
+import { Gallery } from "@/components/apex/Gallery";
+import { Trims } from "@/components/apex/Trims";
+import { Reserve } from "@/components/apex/Reserve";
+import { Footer } from "@/components/apex/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Apex Roadster — 1,020 hp Hybrid Hypercar";
+const description =
+  "Meet the Apex Roadster: a limited-series carbon-monocoque hypercar with 1,020 hp, active aero and 0–100 km/h in 2.4 seconds. Reserve your allocation.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background font-sans text-foreground">
+      <Nav />
+      <main>
+        <Hero />
+        <Design />
+        <Performance />
+        <Gallery />
+        <Trims />
+        <Reserve />
+      </main>
+      <Footer />
     </div>
   );
 }
